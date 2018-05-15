@@ -52,7 +52,7 @@ public class AyahWordActivity extends AppCompatActivity {
         }
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        keepScreenOn = sharedPreferences.getBoolean(Config.KEEP_SCREEN_ON, Config.defaultKeepScreenOn);
+        keepScreenOn = sharedPreferences.getBoolean(Config.Companion.getKEEP_SCREEN_ON(), Config.Companion.getDefaultKeepScreenOn());
     }
 
     @Override

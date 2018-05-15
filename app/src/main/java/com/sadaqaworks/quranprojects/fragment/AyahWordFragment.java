@@ -54,7 +54,7 @@ public class AyahWordFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        lang = sp.getString(Config.LANG, Config.defaultLang);
+        lang = sp.getString(Config.Companion.getLANG(), Config.Companion.getDefaultLang());
         surah_id = getArguments().getLong(SurahDataSource.SURAH_ID_TAG);
         ayah_number = getArguments().getLong(SurahDataSource.SURAH_AYAH_NUMBER);
         ayahWordArrayList = getAyahWordsBySurah(surah_id, ayah_number);
@@ -113,13 +113,13 @@ public class AyahWordFragment extends Fragment {
         //ayahWordArrayList = ayahWordDataSource.getEnglishAyahWordsBySurahVerse(surah_id, ayah_number);
 
         switch (lang) {
-            case Config.LANG_BN:
+            case Config.Companion.getLANG_BN():
                 ayahWordArrayList = ayahWordDataSource.getBanglaAyahWordsBySurah(surah_id, ayah_number);
                 break;
-            case Config.LANG_INDO:
+            case Config.Companion.getLANG_INDO():
                 ayahWordArrayList = ayahWordDataSource.getIndonesianAyahWordsBySurah(surah_id, ayah_number);
                 break;
-            case Config.LANG_EN:
+            case Config.Companion.getLANG_EN():
                 ayahWordArrayList = ayahWordDataSource.getEnglishAyahWordsBySurah(surah_id, ayah_number);
                 break;
         }

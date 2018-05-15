@@ -47,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
         FirstRunPrefs = getSharedPreferences(getPackageName(), MODE_PRIVATE);
         dbVersionPrefs = getSharedPreferences(getPackageName(), MODE_PRIVATE);
 
-        if ((FirstRunPrefs.getBoolean(Config.FIRST_RUN, false)) || (dbVersionPrefs.getInt(Config.DATABASE_VERSION, 0) == DatabaseHelper.DATABASE_VERSION)) {
+        if ((FirstRunPrefs.getBoolean(Config.Companion.getFIRST_RUN(), false)) || (dbVersionPrefs.getInt(Config.Companion.getDATABASE_VERSION(), 0) == DatabaseHelper.DATABASE_VERSION)) {
             if (savedInstanceState == null) {
-                lang = sharedPreferences.getString(Config.LANG, Config.defaultLang);
+                lang = sharedPreferences.getString(Config.Companion.getLANG(), Config.Companion.getDefaultLang());
 
-                if (lang.equals(Config.LANG_BN)) {
+                if (lang.equals(Config.Companion.getLANG_BN())) {
                     setLocaleBangla();
                 } else {
                     setLocaleEnglish();
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (DatabaseHelper.DATABASE_VERSION > dbVersionPrefs.getInt(Config.DATABASE_VERSION, 0)) {
+        if (DatabaseHelper.DATABASE_VERSION > dbVersionPrefs.getInt(Config.Companion.getDATABASE_VERSION(), 0)) {
             Log.d("MyActivity onResume()", "First Run or dbUpgrade");
             {
 
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        String lang = sp.getString(Config.LANG, Config.defaultLang);
+        String lang = sp.getString(Config.Companion.getLANG(), Config.Companion.getDefaultLang());
 
 
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                     case 0:
                         SharedPreferences.Editor ed1 = sharedPreferences.edit();
                         ed1.clear();
-                        ed1.putString(Config.LANG, Config.LANG_BN);
+                        ed1.putString(Config.Companion.getLANG(), Config.Companion.getLANG_BN());
                         ed1.apply();
 
                         setLocaleBangla();
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                     case 1:
                         SharedPreferences.Editor ed2 = sharedPreferences.edit();
                         ed2.clear();
-                        ed2.putString(Config.LANG, Config.LANG_EN);
+                        ed2.putString(Config.Companion.getLANG(), Config.Companion.getLANG_EN());
                         ed2.apply();
                         setLocaleEnglish();
                         //recreate();
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
                         SharedPreferences.Editor ed3 = sharedPreferences.edit();
                         ed3.clear();
-                        ed3.putString(Config.LANG, Config.LANG_INDO);
+                        ed3.putString(Config.Companion.getLANG(), Config.Companion.getLANG_INDO());
                         ed3.apply();
                         setLocaleEnglish();
                         //recreate();
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void setLocaleBangla() {
-        Locale locale = new Locale(Config.LANG_BN);
+        Locale locale = new Locale(Config.Companion.getLANG_BN());
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setLocaleEnglish() {
-        Locale locale = new Locale(Config.LANG_EN);
+        Locale locale = new Locale(Config.Companion.getLANG_EN());
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;
@@ -233,12 +233,12 @@ public class MainActivity extends AppCompatActivity {
             Log.d("MainActivity", "Data Inserted ");
             //then set 'firstrun' as false, using the following line to edit/commit prefs and set dbversion
 
-            dbVersionPrefs.edit().putInt(Config.DATABASE_VERSION, DatabaseHelper.DATABASE_VERSION).apply();
+            dbVersionPrefs.edit().putInt(Config.Companion.getDATABASE_VERSION(), DatabaseHelper.DATABASE_VERSION).apply();
             progressDialog.dismiss();
 
-            if (FirstRunPrefs.getBoolean(Config.FIRST_RUN, true)) {
+            if (FirstRunPrefs.getBoolean(Config.Companion.getFIRST_RUN(), true)) {
                 setLanguage();
-                FirstRunPrefs.edit().putBoolean(Config.FIRST_RUN, false).apply();
+                FirstRunPrefs.edit().putBoolean(Config.Companion.getFIRST_RUN(), false).apply();
             } else {
 
                 FragmentManager fragmentManager = getFragmentManager();

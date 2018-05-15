@@ -53,10 +53,10 @@ public class AyahWordAdapter extends RecyclerView.Adapter<AyahWordAdapter.AyahVi
         this.surah_id = surah_id;
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        showTranslation = sharedPreferences.getBoolean(Config.SHOW_TRANSLATION, Config.defaultShowTranslation);
-        wordByWord = sharedPreferences.getBoolean(Config.WORD_BY_WORD, Config.defaultWordByWord);
-        fontSizeArabic = Integer.parseInt(sharedPreferences.getString(Config.FONT_SIZE_ARABIC, Config.defaultFontSizeArabic));
-        fontSizeTranslation = Integer.parseInt(sharedPreferences.getString(Config.FONT_SIZE_TRANSLATION, Config.defaultFontSizeTranslation));
+        showTranslation = sharedPreferences.getBoolean(Config.Companion.getSHOW_TRANSLATION(), Config.Companion.getDefaultShowTranslation());
+        wordByWord = sharedPreferences.getBoolean(Config.Companion.getWORD_BY_WORD(), Config.Companion.getDefaultWordByWord());
+        fontSizeArabic = Integer.parseInt(sharedPreferences.getString(Config.Companion.getFONT_SIZE_ARABIC(), Config.Companion.getDefaultFontSizeArabic()));
+        fontSizeTranslation = Integer.parseInt(sharedPreferences.getString(Config.Companion.getFONT_SIZE_TRANSLATION(), Config.Companion.getDefaultFontSizeTranslation()));
         corpusTypeface = Typeface.createFromAsset(context.getResources().getAssets(), "amiri.ttf");
     }
 

@@ -50,7 +50,7 @@ public class SurahFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        lang = sp.getString(Config.LANG, Config.defaultLang);
+        lang = sp.getString(Config.Companion.getLANG(), Config.Companion.getDefaultLang());
         surahArrayList = getSurahArrayList();
     }
 
@@ -130,13 +130,13 @@ public class SurahFragment extends Fragment {
         SurahDataSource surahDataSource = new SurahDataSource(getActivity());
 
         switch (lang) {
-            case Config.LANG_BN:
+            case Config.Companion.getLANG_BN():
                 surahArrayList = surahDataSource.getBanglaSurahArrayList();
                 break;
-            case Config.LANG_INDO:
+            case Config.Companion.getLANG_INDO():
                 surahArrayList = surahDataSource.getIndonesianSurahArrayList();
                 break;
-            case Config.LANG_EN:
+            case Config.Companion.getLANG_EN():
                 surahArrayList = surahDataSource.getEnglishSurahArrayList();
                 break;
         }
